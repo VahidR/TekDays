@@ -74,7 +74,9 @@ class BootStrap {
 	}
 
 
-	// adding some volunteers
+	/* 
+	* adding some volunteers
+	*/
 	def sampleEvent = TekEvent.findByName('Gateway Code Camp')
 	sampleEvent.addToVolunteers(new TekUser(fullName: 'Sarah Martin',
 							userName: 'sarah',
@@ -98,8 +100,45 @@ class BootStrap {
 	
 	sampleEvent.save()
 
-
 	
+	/* 
+	* adding some sponsors
+	*/
+	def sponsor1 = new Sponsor(name: 'Google',
+				website: 'www.google.com',
+				description: 'We are Google!')
+	if(!sponsor1.save()){
+		sponsorship1.error.allErrors.each{error -> println ${error}}
+	}
+	
+	def sponsor2 = new Sponsor(name: 'Facebook',
+				website: 'www.facebook.com',
+				description: 'Connect people!')
+	
+	if(!sponsor2.save()){
+		sponsorship1.error.allErrors.each{error -> println ${error}}
+	}
+
+
+	/* 
+	* adding some sponsorships
+	*/
+	def sponsorship1 = new Sponsorship(event: sampleEvent,
+					sponsor: sponsor1,
+					contributionType: 'Other',
+					description: 'Gold sponsor').save()
+	if(!sponsorship1.save()){
+		sponsorship1.error.allErrors.each{error -> println ${error}}
+	}				
+	
+	def sponsorship2 = new Sponsorship(event: sampleEvent,
+					sponsor: sponsor2,
+					contributionType: 'Venue',
+					description: 'Silver sponser')
+	if(!sponsorship2.save()){
+		sponsorship1.error.allErrors.each{error -> println ${error}}
+	}
+    
     
     }
     
