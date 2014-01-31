@@ -1,5 +1,8 @@
 package tekdays
 
+/*
+* Sponsor: the sponsors of each event..
+*/
 class Sponsor {
 	String name
 	String website
@@ -7,7 +10,6 @@ class Sponsor {
 	byte[] logo // logo is an image and will be kept in DB as blob
 
 	static hasMany = [sponsorships: Sponsorship]
-	//static belongsTo = TekEvent
 	
 	static constraints = {
 		name(blank: false)

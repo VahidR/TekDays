@@ -1,5 +1,8 @@
 package tekdays
 
+/* 
+* TekEvent: the HEART of system. The actual event of each conference..
+*/
 class TekEvent {
 	String name
 	String city 
@@ -11,7 +14,9 @@ class TekEvent {
 
 	static hasMany = [volunteers: TekUser, 
 			respondents: String, 
-			sponsorships: Sponsorship]
+			sponsorships: Sponsorship,
+			tasks: Task,
+			messages: TekMessage]
 
 	static constraints = {
 		name()
@@ -23,6 +28,8 @@ class TekEvent {
 		endDate()
 		volunteers(nullable: true)
 		sponsorships(nullable: true)
+		tasks(nullalbe: true)
+		messages(nullable: true)
 
 	}
 

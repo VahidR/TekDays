@@ -1,5 +1,8 @@
 package tekdays
 
+/* 
+* TekUser : the volunteers of each event
+*/
 class TekUser {
 	String fullName
 	String userName

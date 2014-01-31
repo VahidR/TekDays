@@ -1,5 +1,8 @@
 package tekdays
 
+/*
+* Sponsorship: an intermediary class between 'TekEvent' and 'Sponsor'
+*/
 class Sponsorship {
 	TekEvent event
 	Sponsor sponsor
