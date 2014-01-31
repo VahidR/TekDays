@@ -9,7 +9,7 @@ class TekEvent {
 	String description 
 	TekUser organizer
 
-	static hasMany = [volunteers: TekUser]
+	static hasMany = [volunteers: TekUser, respondents: String]
 
 	static constraints = {
 		name()

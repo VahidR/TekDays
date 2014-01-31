@@ -89,6 +89,12 @@ class BootStrap {
 							email: 'mrbill@email.com',
 							website: 'www.yahoo.com',
 							bio: 'a savy web developer'))
+
+	sampleEvent.addToRespondents('aaaa@aaaaa.com')						
+	sampleEvent.addToRespondents('bbbb@bbbbb.com')						
+	sampleEvent.addToRespondents('cccc@ccccc.com')						
+	sampleEvent.addToRespondents('dddd@ddddd.com')						
+	sampleEvent.addToRespondents('eeee@eeeee.com')						
 	
 	sampleEvent.save()
 
