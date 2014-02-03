@@ -6,7 +6,7 @@ package tekdays
 class TekMessage {
 	String subject
 	String content
-	TekMessage parent // interesting .. for a hierechical replying stuff 
+	TekMessage parent // interesting .. for a hierechical replying stuff
 	TekEvent event
 	TekUser author
 
@@ -16,7 +16,7 @@ class TekMessage {
 		subject(blank: false)
 		content(blank: false, maxSize: 2000)
 		parent(nullable: true) // the fist message without reply
-		author(nullable: false)
+		author(nullable: false) // there is no message without author
 	}
 
 

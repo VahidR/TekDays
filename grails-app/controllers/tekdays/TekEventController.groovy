@@ -5,25 +5,34 @@ package tekdays
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
+// Transactional means that it has to deal with DB
 @Transactional(readOnly = true)
 class TekEventController {
 
+	//RESTful controller ?
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond TekEvent.list(params), model:[tekEventInstanceCount: TekEvent.count()]
+        params.max = Math.min(max ?: 10, 100) // making sure that we get 100 entries in max
+        // view: index
+		// By convention, Grails creates tekEventInstance as the contex variable;
+		// so for instance, tekEventInstanceList is also a convention.
+		//tekEventInstanceCount : another context variable derived from model, for pagination
+		respond TekEvent.list(params), model:[tekEventInstanceCount: TekEvent.count()]
     }
 
     def show(TekEvent tekEventInstance) {
+		// view: show
+		// tekEventInstace == tekEventInstance.id in tekEvent/index.gsp page
         respond tekEventInstance
     }
 
     def create() {
+		// view: create
         respond new TekEvent(params)
     }
 
-    @Transactional
+    @Transactional // it is NOT read-only anymore
     def save(TekEvent tekEventInstance) {
         if (tekEventInstance == null) {
             notFound()
@@ -31,7 +40,7 @@ class TekEventController {
         }
 
         if (tekEventInstance.hasErrors()) {
-            respond tekEventInstance.errors, view:'create'
+            respond tekEventInstance.errors, view:'create' // pass the errors to create view, with Error messages.
             return
         }
 
