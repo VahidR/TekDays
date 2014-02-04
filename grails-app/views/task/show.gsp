@@ -67,7 +67,20 @@
 					
 				</li>
 				</g:if>
-			
+		
+
+				<g:if test="${taskInstance?.completed}">
+				<li class="fieldcontain">
+					<span id="completed-label" class="property-label"><g:message code="task.completed.label" default="Completed" /></span>
+					
+						<span class="property-value" aria-labelledby="completed-label">
+						 <g:formatBoolean boolean="${taskInstance?.completed}" true="Yes" false="NO" />
+						</span>
+					
+				</li>
+				</g:if>
+
+
 			</ol>
 			<g:form url="[resource:taskInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">

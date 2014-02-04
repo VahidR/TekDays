@@ -9,6 +9,7 @@ class Task {
 	Date dueDate
 	TekUser assignTo
 	TekEvent event
+	Boolean completed
 
 	static belongsTo = TekEvent
 
@@ -17,5 +18,6 @@ class Task {
 		notes(blank: true, nullable: true, maxSize: 5000)
 		assignTo(nullable: true)
 		dueDate(nullable: true)
+		completed(nullable: true)
 	}
 }
