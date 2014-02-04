@@ -9,26 +9,28 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class TekEventController {
 
-	//RESTful controller ?
+    def taskService
+    
+    //RESTful controller ?
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100) // making sure that we get 100 entries in max
         // view: index
-		// By convention, Grails creates tekEventInstance as the contex variable;
-		// so for instance, tekEventInstanceList is also a convention.
-		//tekEventInstanceCount : another context variable derived from model, for pagination
-		respond TekEvent.list(params), model:[tekEventInstanceCount: TekEvent.count()]
+	// By convention, Grails creates tekEventInstance as the contex variable;
+	// so for instance, tekEventInstanceList is also a convention.
+	//tekEventInstanceCount : another context variable derived from model, for pagination
+	respond TekEvent.list(params), model:[tekEventInstanceCount: TekEvent.count()]
     }
 
     def show(TekEvent tekEventInstance) {
-		// view: show
-		// tekEventInstace == tekEventInstance.id in tekEvent/index.gsp page
+	// view: show
+	// tekEventInstace == tekEventInstance.id in tekEvent/index.gsp page
         respond tekEventInstance
     }
 
     def create() {
-		// view: create
+	// view: create
         respond new TekEvent(params)
     }
 
@@ -45,6 +47,7 @@ class TekEventController {
         }
 
         tekEventInstance.save flush:true
+	taskService.addDefaultTasks(tekEventInstance)
 
         request.withFormat {
             form {
