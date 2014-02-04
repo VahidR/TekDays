@@ -9,7 +9,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class TekEventController {
 
-    def taskService
+    def taskService // declaring and injecting TaskService
     
     //RESTful controller ?
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -47,7 +47,7 @@ class TekEventController {
         }
 
         tekEventInstance.save flush:true
-	taskService.addDefaultTasks(tekEventInstance)
+	taskService.addDefaultTasks(tekEventInstance) // now add the default tasks for each event after being sure that event has created and has no error
 
         request.withFormat {
             form {
