@@ -19,8 +19,9 @@
 		<div id="show-tekEvent" class="content scaffold-show" role="main">
 			<h1>${tekEventInstance?.name}</h1>
 			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
+				<div class="message" role="status">${flash.message}</div>
 			</g:if>
+
 			<ol class="property-list tekEvent">
 		
 				<g:if test="${tekEventInstance?.description}">
@@ -38,7 +39,6 @@
 					<span id="city-label" class="property-label"><g:message code="tekEvent.city.label" default="Location" /></span>
 					
 					<span class="property-value" aria-labelledby="city-label">
-						<g:fieldValue bean="${tekEventInstance}" field="venue"/>
 						<g:fieldValue bean="${tekEventInstance}" field="city"/>
 					</span>
 					
@@ -111,17 +111,6 @@
 				</g:if>
 			
 							
-				<g:if test="${tekEventInstance?.messages}">
-				<li class="fieldcontain">
-					<span id="messages-label" class="property-label"><g:message code="tekEvent.messages.label" default="Messages" /></span>
-					
-						<g:each in="${tekEventInstance.messages}" var="m">
-						<span class="property-value" aria-labelledby="messages-label"><g:link controller="tekMessage" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${tekEventInstance?.respondents}">
 				<li class="fieldcontain">
 					<span id="respondents-label" class="property-label"><g:message code="tekEvent.respondents.label" default="Respondents" /></span>
@@ -131,6 +120,7 @@
 				</li>
 				</g:if>
 		
+			
 				<g:if test="${tekEventInstance?.tasks}">
 				<li class="fieldcontain">
 					<span id="tasks-label" class="property-label"><g:message code="tekEvent.tasks.label" default="Tasks" /></span>
@@ -143,9 +133,22 @@
 					
 				</li>
 				</g:if>
+				
+				
+				<%-- <g:if test="${tekEventInstance?.messages}"> --%>
+				<li class="fieldcontain">
+					<span id="messages-label" class="property-label"><g:message code="tekEvent.messagess.label" default="Messages" /></span>
+					
+						<span class="property-value" aria-labelledby="messages-label">
+						 	<g:link controller="tekMessage" action="index" id="${tekEventInstance.id}">View Messages</g:link>
+						</span>
+					
+				</li>
+				<%--</g:if>--%>
 
 
 			</ol>
+
 			<g:form url="[resource:tekEventInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
 					<g:link class="edit" action="edit" resource="${tekEventInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>

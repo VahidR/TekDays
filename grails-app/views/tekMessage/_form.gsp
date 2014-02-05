@@ -1,6 +1,15 @@
 <%@ page import="tekdays.TekMessage" %>
 
 
+<g:if test="${tekMessageInstance?.parent}">
+	<div class="fieldcontain ${hasErrors(bean: tekMessageInstance, field: 'parent', 'error')}">
+		<label for="parent">
+			In reply to: 
+		</label>
+		${tekMessageInstance?.parent?.author}
+	</div>	
+</g:if>
+
 
 <div class="fieldcontain ${hasErrors(bean: tekMessageInstance, field: 'subject', 'error')} required">
 	<label for="subject">
@@ -34,11 +43,4 @@
 	<g:select id="author" name="author.id" from="${tekdays.TekUser.list()}" optionKey="id" required="" value="${tekMessageInstance?.author?.id}" class="many-to-one"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: tekMessageInstance, field: 'event', 'error')} required">
-	<label for="event">
-		<g:message code="tekMessage.event.label" default="Event" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="event" name="event.id" from="${tekdays.TekEvent.list()}" optionKey="id" required="" value="${tekMessageInstance?.event?.id}" class="many-to-one"/>
-</div>
-
+<g:hiddenField name="event.id" value="${tekMessageInstance?.event?.id}" />
